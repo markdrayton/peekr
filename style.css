@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    font-family: Helvetica;
+}
+
+#app {
+    width: 100vw;
+    height: 100vh;
+}
+
+#map {
+    width: 100vw;
+    height: 65vh;
+}
+
+#container {
+    display: flex;
+}
+
+#panorama {
+    flex: 0 0 50vw;
+    height: 35vh;
+}
+
+#control {
+    flex: 1;
+    padding: 10px;
+}
+
+.form, .form > button {
+    margin: 10px 0 10px;
+}
