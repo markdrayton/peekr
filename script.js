@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 this.markers.push(new google.maps.Marker({
                     position: this.path[0],
                     icon: {
-                        url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                        url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
                     },
                     map: this.map,
                     zIndex: -1,
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 this.markers.push(new google.maps.Marker({
                     position: this.path[this.path.length - 1],
                     icon: {
-                        url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                        url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                     },
                     map: this.map,
                 }));
