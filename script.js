@@ -1,11 +1,6 @@
 /* Lots of ideas from https://github.com/Luuka/GPXParser.js! Thanks ;-) */
 
 const API_KEY = 'AIzaSyB1mw78NmkuNaA3Vi4YFJ9utZzDJneqJDU';
-const PEGMAN_WIDTH = 60;
-const PEGMAN_HEIGHT = 60;
-const PEGMAN_ANCHOR_X = 30;
-const PEGMAN_ANCHOR_Y = 42;
-const PEGMAN_POSITIONS = 16;
 
 document.addEventListener("DOMContentLoaded", function() {
     var app = new Vue({
@@ -20,27 +15,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 center: { lat: 47.366667, lng: 8.55 },
                 zoom: 10,
                 fullscreenControl: false,
-                streetViewControl: false,
             });
 
             this.panorama = new google.maps.StreetViewPanorama(document.getElementById("panorama"), {
                 fullscreenControl: false,
             });
+            this.map.setStreetView(this.panorama);
 
             this.path = [];
             this.markers = [];
-            this.pegman = new google.maps.Marker({
-                map: this.map,
-                visible: false,
-            });
-
-            this.panorama.addListener("position_changed", () => {
-                this.setPegmanPosition(this.panorama.getPosition());
-            });
-
-            this.panorama.addListener("pov_changed", () => {
-                this.setPegmanHeading(this.panorama.getPov().heading);
-            });
 
             this.streetViewCoverage = new google.maps.StreetViewCoverageLayer();
         },
@@ -74,8 +57,6 @@ document.addEventListener("DOMContentLoaded", function() {
             },
 
             plotLine: function() {
-                this.pegman.setVisible(false);
-
                 if (this.line) {
                     this.line.setMap(null);
                 }
@@ -85,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 this.line = new google.maps.Polyline({
                     path: this.path,
-                    strokeColor: "#ff8000",
+                    strokeColor: "#fc7307",
                     strokeWeight: 2,
                     strokeOpacity: 0.75,
                 });
@@ -118,7 +99,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     this.path[0],
                     this.calculateHeading(this.path[0], this.path[1]),
                 );
-                this.pegman.setVisible(true);
     
                 this.streetViewCoverage.setMap(this.map);
             },
@@ -152,20 +132,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                         // FIXME else?
                     });
-            },
-
-            setPegmanPosition: function(latlng) {
-                this.pegman.setPosition(latlng);
-            },
-
-            setPegmanHeading: function(heading) {
-                const origin_y = (Math.round(heading / (360 / PEGMAN_POSITIONS)) % PEGMAN_POSITIONS) * PEGMAN_HEIGHT;
-                this.pegman.setIcon({
-                    size: new google.maps.Size(PEGMAN_WIDTH, PEGMAN_HEIGHT),
-                    origin: new google.maps.Point(0, origin_y),
-                    anchor: new google.maps.Point(PEGMAN_ANCHOR_X, PEGMAN_ANCHOR_Y),
-                    url: "https://maps.gstatic.com/tactile/pegman_v3/default/rotating-1x.png",
-                });
             },
 
             toggleStreetViewCoverage: function() {
