@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 fullscreenControl: false,
             });
 
+            this.addStreetViewCoverageToggle();
+
             this.panorama = new google.maps.StreetViewPanorama(document.getElementById("panorama"), {
                 fullscreenControl: false,
             });
@@ -99,8 +101,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     this.path[0],
                     this.calculateHeading(this.path[0], this.path[1]),
                 );
-    
-                this.streetViewCoverage.setMap(this.map);
             },
 
             clickHandler: function(e) {
@@ -132,6 +132,25 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                         // FIXME else?
                     });
+            },
+
+            addStreetViewCoverageToggle: function() {
+                const div = document.createElement("div");
+
+                const control = document.createElement("div");
+                control.id = "street-view-control";
+                control.title = "Show or hide Street View coverage layer";
+
+                const text = document.createElement("div");
+                text.id = "street-view-control-text";
+                text.innerHTML = "Toggle Street View coverage";
+
+                control.append(text);
+                div.append(control);
+
+                control.addEventListener("click", this.toggleStreetViewCoverage);
+
+                this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(div);
             },
 
             toggleStreetViewCoverage: function() {
