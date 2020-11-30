@@ -17,12 +17,17 @@
                 <div id="panorama"></div>
                 <div id="control">
                     <h1>peekr</h1>
+                    <p>An easy way to check out the Street View for a GPX route. Load a route
+                    from your computer then click on the rendered line to see the Street View
+                    in the direction of travel.</p>
                     <div class="form">
                         <form v-on:submit.prevent>
-                            <label for="input-file">Choose a GPX file</label>
-                            <input type="file" v-on:change="onChooseGPX" id="input-file">
-                            <button v-on:click="onLoadGPX">Go!</button>
-                            <button v-on:click="onLoadDemo">Load a demo GPX file</button>
+                            <label for="file" class="button">Choose a GPX file</label>
+                            then
+                            <button v-on:click="onLoadGPX" class="button">go</button>.
+                            <input type="file" v-on:change="onChooseGPX" id="file">
+                            Or, try a
+                            <button v-on:click="onLoadDemo" class="button">demo route</button>!
                         </form>
                     </div>
                 </div>
