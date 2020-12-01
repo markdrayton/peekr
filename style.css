@@ -6,24 +6,26 @@ body {
 #app {
     width: 100vw;
     height: 100vh;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 3fr 2fr;
 }
 
-#map {
-    width: 100vw;
-    height: 65vh;
+@media only screen and (orientation: landscape) {
+    #map {
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
 }
 
-#container {
-    display: flex;
-}
-
-#panorama {
-    flex: 0 0 50vw;
-    height: 35vh;
+@media only screen and (orientation: portrait) {
+    #map {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
 }
 
 #control {
-    flex: 1;
     padding: 10px;
 }
 
