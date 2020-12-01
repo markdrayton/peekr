@@ -50,6 +50,12 @@ input[type="file"] {
     background: #256ec1;
 }
 
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
 #street-view-control {
     background-color: #fff;
     border: 2px solid #fff;
@@ -58,6 +64,10 @@ input[type="file"] {
     cursor: pointer;
     margin-bottom: 22px;
     text-align: center;
+}
+
+.highlight {
+    animation: blink 0.8s linear 0.2s 2;
 }
 
 #street-view-control-text {

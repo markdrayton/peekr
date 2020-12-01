@@ -129,8 +129,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         if (data.status == "OK") {
                             this.panorama.setPosition(latlng);
                             this.panorama.setPov({heading: heading, pitch: 0});
+                        } else {
+                            /* Ugh alert(). Ideally it'd be possible to make it clear that a given
+                               part of the polyline has no coverage but querying the metadata API
+                               for every point is prohibitively expensive. */
+                            alert("No Street View coverage at this location.");
+                            // hint street view coverage button
+                            document.getElementById("street-view-control").classList.add("highlight");
                         }
-                        // FIXME else?
                     });
             },
 
